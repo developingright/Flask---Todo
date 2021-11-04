@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %} Home{% endblock %}
+
+{% block content %}
+    <h1>{{ user.first_name}}</h1>
+   
+    <div class="container">
+        <div class="search">
+            <form  method="POST">
+                <input type="text" name="title" id="title" placeholder="Enter title">
+                <button type="submit" class="subs">+</button>
+            </form>
+        </div>
+        {% for task in user.tasks %}
+        <div class="box">
+            {% if task.completed == True %}
+                <img src="{{ url_for('static',filename = 'images/circle.svg') }}" alt=""></img>
+            {% else %}
+                <img src="{{ url_for('static',filename = 'images/circle2.svg') }}" alt=""></img>
+            {% endif %}
+        <h3>{{task.title}}</h3>
+            
+            <div class="right">          
+                    <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}})"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                    <a href="#" onClick="deleteTask({{task.id}})"><img src="{{ url_for('static',filename = 'images/delete.svg') }}" alt="" ></img></a>
+            </div>
+
+        </div>
+        {% endfor %}
+        <div class="modal-bg">
+            <div class="modal">
+                <h2>Edit the task</h2>
+                <form action="/update/" id="myform" method="POST">
+                    <label for="">Title</label>
+                    <input type="text" name="title" id="name">
+                    <label for="check">Completed</label>
+                    <input type="checkbox" name="check" id="check">
+                    <button type="submit">Edit</button>
+                </form>
+                
+                <span class="modal-close">X</span>
+                
+                
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
