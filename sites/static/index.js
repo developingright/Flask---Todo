@@ -14,9 +14,16 @@ modalclose.addEventListener('click',function(){
     bg.classList.remove('bg-active');
 });
 // console.log(modalbtn);
-function val(title,id){
+function val(title,id,complete){
     document.getElementById("name").value = title;
     document.getElementById("myform").action = `/update/${id}`;;
+    if(complete == 1){
+        document.getElementById("check").checked = true;
+
+    }
+    else{
+        document.getElementById("check").checked = false;
+    }
 }
 
 for(var i=0; i< buttons.length; i++){

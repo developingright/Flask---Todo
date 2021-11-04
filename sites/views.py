@@ -29,6 +29,12 @@ def update(id):
     if request.method=="POST":
         title = request.form.get("title")
         task.title = title 
+        completed = request.form.get("check")
+        task.title = title 
+        if completed == 'on':
+            task.completed = True
+        else:
+            task.completed = False
         db.session.commit()
     return redirect('/')
 

@@ -20,8 +20,13 @@
             {% endif %}
         <h3>{{task.title}}</h3>
             
-            <div class="right">          
-                    <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}})"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+            <div class="right">
+                    {% if task.completed == True %}
+
+                        <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1)"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                    {% else %}
+                    <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},0)"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                    {% endif %}
                     <a href="#" onClick="deleteTask({{task.id}})"><img src="{{ url_for('static',filename = 'images/delete.svg') }}" alt="" ></img></a>
             </div>
 
