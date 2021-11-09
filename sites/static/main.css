@@ -29,20 +29,22 @@
 .search input{
     outline: 0;
     border: 0;
-    padding: 23px;
+    padding: 17px;
     filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.25));
     border-radius: 14px;
     width: 80%;
     font-size: 1.4em;
 }
 .subs{
-    width: 1.2em;
+    width: 1.6em;
+    height: 1.65em;
     border-radius: 100%; 
-    font-size: 4em;  
+    font-size: 2.8em;  
     float: right; 
     background-color: #2753FF;
     color: white;
     border: 0;
+    text-align: center ;
     filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.25));
 }
 /* ::placeholder{
@@ -60,7 +62,7 @@ img,h3{
     position: relative;
 }
 h3{
-    font-family: roboto;
+    
     margin-left: 2em;
     font-size: 1.2em;
     font-weight: 500;
