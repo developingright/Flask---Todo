@@ -39,7 +39,7 @@
     width: 1.6em;
     height: 1.65em;
     border-radius: 100%; 
-    font-size: 2.8em;  
+    font-size: 2.7em;  
     float: right; 
     background-color: #2753FF;
     color: white;
@@ -105,7 +105,7 @@ h3{
     transition: visibility 0s, opacity 0.5s;
 }
 .modal{
-    font-family: roboto;
+ 
     border-radius: 10px;
     position: relative;
     width: 30%;
@@ -125,7 +125,7 @@ h3{
     flex-direction: column;
 }
 .modal label{
-    font-family: roboto;
+
     font-weight: 500;
 }
 .modal button{
@@ -157,4 +157,60 @@ h3{
     filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.2));
     border-radius: 10px;
     width:60%;
+}
+.login-form{
+    
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.login-form label{
+    padding:10px 0;
+}
+.login-form button{
+    margin-top: 20px;
+    width: 100px;
+    outline: none;
+    border: none;
+
+    /* margin: 20 auto; */
+}
+.login-form input{
+    outline: 0;
+
+    padding: 5px 10px;
+
+    border-radius: 14px;
+    width: 80%;
+    font-size: 1.4em;
+}
+.signup-form{
+    
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.signup-form label{
+    padding:10px 0;
+}
+.signup-form button{
+    margin-top: 20px;
+    width: 100px;
+    outline: none;
+    border: none;
+
+    /* margin: 20 auto; */
+}
+.signup-form input{
+    outline: 0;
+
+    padding: 5px 10px;
+
+    border-radius: 14px;
+    width: 80%;
+    font-size: 1.4em;
 }
