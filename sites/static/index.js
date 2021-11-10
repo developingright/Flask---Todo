@@ -16,6 +16,7 @@ modalclose.addEventListener('click',function(){
 // console.log(modalbtn);
 function val(title,id,complete){
     document.getElementById("name").value = title;
+ 
     document.getElementById("myform").action = `/update/${id}`;;
     if(complete == 1){
         document.getElementById("check").checked = true;

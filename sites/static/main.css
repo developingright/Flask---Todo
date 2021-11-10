@@ -2,12 +2,18 @@
     margin: 0;
     box-sizing: border-box;
 }
-.container{
+.contains{
     margin: auto;
     margin-top: 100px;
     width: 40%;
     /* height: 100%; */
     /* background-color: blueviolet; */
+}
+.navbar-brand{
+    color: red !important;
+}
+.nav-border{
+    border-bottom: 2px solid red;
 }
 .box{
 
@@ -74,6 +80,9 @@ h3{
 .right img{
     margin-right: 1.2em;
 }
+.intro{
+   margin-top: 40px;
+}
 .subs{
 
     fill: transparent;
@@ -105,7 +114,7 @@ h3{
     transition: visibility 0s, opacity 0.5s;
 }
 .modal{
- 
+
     border-radius: 10px;
     position: relative;
     width: 30%;
@@ -147,8 +156,8 @@ h3{
 .modal h2{
     
 
-    /* margin-top: 30px;
-    margin-bottom: 10px; */
+    margin-top: 30px;
+    margin-bottom: 10px; 
 }
 .modal input{
     outline: 0;
@@ -157,6 +166,9 @@ h3{
     filter: drop-shadow(0px 0px 14px rgba(0, 0, 0, 0.2));
     border-radius: 10px;
     width:60%;
+}
+.modal label{
+    margin: 10px 0;
 }
 .login-form{
     
