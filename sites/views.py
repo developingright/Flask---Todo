@@ -2,7 +2,7 @@ from flask import Blueprint, render_template , request,jsonify,redirect,url_for
 from flask.helpers import flash
 from flask_login import login_required , current_user
 from sites.auth import login
-from .models import Task
+from .models import Task,User
 import json
 from . import db
 views = Blueprint('views',__name__)
@@ -16,7 +16,8 @@ def index():
         if len(title)<4:
             flash("The title is too short! ",category="error")
         else:
-            new_task = Task(title=title,user_id=current_user.id)
+            new_task = Task(title=title)
+            current_user.tasks.append(new_task)
             db.session.add(new_task)
             db.session.commit()
     return render_template("index.html",user = current_user)
@@ -25,6 +26,7 @@ def index():
 @views.route('/update/<int:id>',methods= ['POST','GET'])
 @login_required
 def update(id):
+    users = User.query.all()
     task  = Task.query.get(id)
     if request.method=="POST":
         title = request.form.get("title")
@@ -35,17 +37,41 @@ def update(id):
             task.completed = True
         else:
             task.completed = False
+        collaborate = request.form.get("collaborate")
+  
+        flag = False
+        for i in task.users:
+            if i.email == collaborate:
+                flag = True
+                print("the email was found")
+                break
+        print(flag)
+        if flag == False:
+            for x in users:
+                f = x.email
+                print("collaborate and user  is ",collaborate,f)
+                if f==collaborate:
+                    m = User.query.get(x.id)
+                    task.users.append(m)
+                else:
+                    print("no result found")
+        
         db.session.commit()
     return redirect('/')
 
-@views.route('/delete-task',methods = ['POST'])
+@views.route('/delete/<int:id>')
 @login_required
-def delete_note():
-    task = json.loads(request.data)
-    taskId = task['taskId']
-    task = Task.query.get(taskId)
-    if task:
-        if task.user_id == current_user.id:
-            db.session.delete(task)
-            db.session.commit()
-    return jsonify({})
+def delete_note(id):
+    task = Task.query.get(id)
+    print(id)
+    for user in task.users:
+      
+        user.tasks.remove(task)
+        db.session.commit()
+    return redirect('/')
+
+@views.route('/collaboration/')
+@login_required
+def collab_task():
+
+    return render_template("collab.html",user = current_user)

@@ -1,11 +1,4 @@
-function deleteTask(taskId){
-    fetch('/delete-task',{
-        method: 'POST',
-        body: JSON.stringify({taskId: taskId})
-    }).then((_res) => {
-        window.location.href = "/"
-    });
-}
+
 // var modalbtn = document.querySelector('.modal-btn');
 var buttons = document.getElementsByClassName('modal-btn');
 var bg = document.querySelector('.modal-bg');
@@ -14,10 +7,12 @@ modalclose.addEventListener('click',function(){
     bg.classList.remove('bg-active');
 });
 // console.log(modalbtn);
-function val(title,id,complete){
-    document.getElementById("name").value = title;
- 
-    document.getElementById("myform").action = `/update/${id}`;;
+function val(title,id,complete,emails){
+    document.getElementById("name").value=title;
+    console.log(id);
+    document.getElementById("myform").action = `/update/${id}`;
+    console.log(emails);
+    document.getElementById("collaborate").value = emails;
     if(complete == 1){
         document.getElementById("check").checked = true;
 

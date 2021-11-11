@@ -3,7 +3,7 @@
 
 {% block content %}
     <h2 class="intro" align="center">Welcome, {{ user.first_name}}</h2>
-   
+
     <div class="container contains">
         <div class="search">
             <form  method="POST">
@@ -11,7 +11,7 @@
                 <button type="submit" class="subs">+</button>
             </form>
         </div>
-        {% for task in user.tasks %}
+        {% for task in user.tasks[::-1] %}
         <div class="box">
             {% if task.completed == True %}
                 <img src="{{ url_for('static',filename = 'images/circle.svg') }}" alt=""></img>
@@ -21,13 +21,17 @@
         <h3>{{task.title}}</h3>
             
             <div class="right">
+              
                     {% if task.completed == True %}
-
-                        <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1)"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                        {% if task.users[1] %}
+                            <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'task.users[1].email')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                        {% else %}
+                            <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                        {% endif %}
                     {% else %}
                     <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},0)"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
                     {% endif %}
-                    <a href="#" onClick="deleteTask({{task.id}})"><img src="{{ url_for('static',filename = 'images/delete.svg') }}" alt="" ></img></a>
+                    <a href="/delete/{{task.id}}" ><img src="{{ url_for('static',filename = 'images/delete.svg') }}" alt="" ></img></a>
             </div>
 
         </div>
@@ -38,8 +42,11 @@
                 <form action="/update/" id="myform" method="POST">
                     <label for="">Title</label>
                     <input type="text" name="title" id="name">
+                    
                     <label for="check">Completed</label>
                     <input type="checkbox" name="check" id="check">
+                    <label for="">Collaboration</label>
+                    <input type="email" name="collaborate" id="collaborate">
                     <button type="submit">update</button>
                 </form>
                 
