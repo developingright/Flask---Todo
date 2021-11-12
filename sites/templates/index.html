@@ -12,29 +12,31 @@
             </form>
         </div>
         {% for task in user.tasks[::-1] %}
-        <div class="box">
-            {% if task.completed == True %}
-                <img src="{{ url_for('static',filename = 'images/circle.svg') }}" alt=""></img>
-            {% else %}
-                <img src="{{ url_for('static',filename = 'images/circle2.svg') }}" alt=""></img>
-            {% endif %}
-        <h3>{{task.title}}</h3>
-            
-            <div class="right">
-              
-                    {% if task.completed == True %}
-                        {% if task.users[1] %}
-                            <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'task.users[1].email')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+            {% if task.users.count()==1 %}
+            <div class="box">
+                {% if task.completed == True %}
+                    <img src="{{ url_for('static',filename = 'images/circle.svg') }}" alt=""></img>
+                {% else %}
+                    <img src="{{ url_for('static',filename = 'images/circle2.svg') }}" alt=""></img>
+                {% endif %} 
+            <h3>{{task.title}}</h3>
+                
+                <div class="right">
+                
+                        {% if task.completed == True %}
+                            {% if task.users[1] %}
+                                <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'{{task.users[1].email}}')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                            {% else %}
+                                <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                            {% endif %}
                         {% else %}
-                            <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                        <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},0,'')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
                         {% endif %}
-                    {% else %}
-                    <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},0)"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
-                    {% endif %}
-                    <a href="/delete/{{task.id}}" ><img src="{{ url_for('static',filename = 'images/delete.svg') }}" alt="" ></img></a>
+                        <a href="/delete/{{task.id}}" ><img src="{{ url_for('static',filename = 'images/delete.svg') }}" alt="" ></img></a>
+                </div>
+                {% endif %}
             </div>
 
-        </div>
         {% endfor %}
         <div class="modal-bg">
             <div class="modal">
@@ -46,7 +48,7 @@
                     <label for="check">Completed</label>
                     <input type="checkbox" name="check" id="check">
                     <label for="">Collaboration</label>
-                    <input type="email" name="collaborate" id="collaborate">
+                    <input type="text" name="collaborate" id="collaborate">
                     <button type="submit">update</button>
                 </form>
                 

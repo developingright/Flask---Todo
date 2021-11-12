@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template , request,jsonify,redirect,url_for
+from flask import Blueprint, render_template , request  ,redirect,url_for
 from flask.helpers import flash
 from flask_login import login_required , current_user
 from sites.auth import login
 from .models import Task,User
-import json
 from . import db
 views = Blueprint('views',__name__)
 
@@ -57,7 +56,11 @@ def update(id):
                     print("no result found")
         
         db.session.commit()
-    return redirect('/')
+
+    if task.users.count()>1:
+        return redirect('/collaboration')
+    else:
+        return redirect('/')
 
 @views.route('/delete/<int:id>')
 @login_required

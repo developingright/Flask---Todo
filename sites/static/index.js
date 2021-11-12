@@ -9,10 +9,10 @@ modalclose.addEventListener('click',function(){
 // console.log(modalbtn);
 function val(title,id,complete,emails){
     document.getElementById("name").value=title;
-    console.log(id);
-    document.getElementById("myform").action = `/update/${id}`;
-    console.log(emails);
     document.getElementById("collaborate").value = emails;
+    document.getElementById("myform").action = `/update/${id}`;
+
+    
     if(complete == 1){
         document.getElementById("check").checked = true;
 
@@ -30,4 +30,4 @@ for(var i=0; i< buttons.length; i++){
     });
 }
 
-console.log("asdasd");
+
