@@ -226,3 +226,41 @@ h3{
     width: 80%;
     font-size: 1.4em;
 }
+.tags-input{
+    border: 1px solid #333;
+    display: inline-block;
+}
+.tags-input .tag{
+    font-size: 85%;
+    padding: 0.5em 0.75em;
+    display: inline-block;
+    background-color: #ddd;
+    margin: 0.25em 0.1em;
+    transition: all 0.1s linear;
+    cursor: pointer;
+}
+.tags-input .tag:hover{
+    background-color: #3af;
+    color: white;
+}
+.tags-input .tag .close::after{
+    content: "x";
+    font-weight: lighter;
+    display: inline-block;
+    transform:scale(1.3);
+    margin-left:0.75em;
+}
+.tags-input .tag .close:hover::after{
+    content: "x";
+    font-weight: lighter;
+    display: inline-block;
+    transform:scale(1.3);
+    margin-left:0.75em;
+    color: red;
+}
+.tags-input .main-input{
+    border:0;
+    outline: 0;
+    padding: 0.25em;
+    
+}

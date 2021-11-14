@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template , request  ,redirect,url_for
+from flask import Blueprint, render_template , request  ,redirect,url_for,jsonify
 from flask.helpers import flash
 from flask_login import login_required , current_user
 from sites.auth import login
@@ -78,3 +78,16 @@ def delete_note(id):
 def collab_task():
 
     return render_template("collab.html",user = current_user)
+
+@views.route('/collaborate/<int:id>', methods=['GET', 'POST'])
+def taskusers(id):
+    task = Task.query.get(id)
+    # GET request
+    l = []
+    if request.method == 'GET':
+        for users in task.users:
+            l.append(users.email)
+
+        print(l)
+        return jsonify(l)  # serialize and use JSON headers
+ 

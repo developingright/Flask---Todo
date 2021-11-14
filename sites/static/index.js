@@ -12,7 +12,7 @@ function val(title,id,complete,emails){
     document.getElementById("collaborate").value = emails;
     document.getElementById("myform").action = `/update/${id}`;
 
-    
+
     if(complete == 1){
         document.getElementById("check").checked = true;
 
