@@ -20,7 +20,7 @@
                     <img src="{{ url_for('static',filename = 'images/circle2.svg') }}" alt=""></img>
                 {% endif %} 
                 <h3>{{task.title}}</h3>
-                 
+                <p id="hidden-tag">{{task.id}}</p>
                 <div class="right">
                         
                         {% if task.completed == True %}
@@ -38,6 +38,7 @@
             </div>
 
         {% endfor %}
+        
         <div class="modal-bg">
             <div class="modal">
                 <h2>Edit the task</h2>
@@ -47,8 +48,8 @@
                     
                     <label for="check">Completed</label>
                     <input type="checkbox" name="check" id="check">
-                    <label for="">Collaboration</label>
-                    <input type="text" name="collaborate" id="collaborate">
+                    <!-- <label for="">Collaboration</label>
+                    <input type="text" name="collaborate" id="collaborate"> -->
                     <div class="tags-input" data-name="tags-input">
                     </div>
                     <button type="submit">update</button>

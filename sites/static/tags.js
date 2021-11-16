@@ -1,5 +1,3 @@
-function usertags(id){
-
 
 [].forEach.call(document.getElementsByClassName('tags-input'),function(el){
     let hiddenInput = document.createElement('input'),
@@ -8,7 +6,7 @@ function usertags(id){
     
     hiddenInput.setAttribute('type','hidden');
     hiddenInput.setAttribute('name',el.getAttribute ('data-name'));
-
+    hiddenInput.setAttribute('id','hiddeninput');
     mainInput.setAttribute('type','text');
     mainInput.classList.add('main-input');
     mainInput.addEventListener('input',function(){
@@ -33,6 +31,20 @@ function usertags(id){
     
     el.appendChild(mainInput);
     el.appendChild(hiddenInput);
+    k = document.getElementById('hidden-tag').innerHTML;
+    console.log(k);
+    var l = [];
+    fetch( `/collaborate/${k}`)
+    .then(function (response) {
+        return response.json();
+    }).then(function (text) {
+        console.log('GET response:');
+        console.log('the list is ', text);
+        for(let i = 1; i<text.length; i++){
+            addTag(text[i]);
+        }
+    });
+   
 
     function addTag (text){
         let tag = {
@@ -54,15 +66,7 @@ function usertags(id){
         el.insertBefore(tag.element,mainInput);
         refreshTag();
     }
-    fetch( `/collaborate/${id}`)
-    .then(function (response) {
-        return response.json();
-    }).then(function (text) {
-        console.log('GET response:');
-        for(let i = 0 ; i<text.length; i++){
-            addTag(text[i]);    
-        } 
-    });
+   
     function removeTag(index){
         let tag = tags[index];
         tags.splice(index,1);
@@ -79,6 +83,6 @@ function usertags(id){
     function filterTag(tag){
         return tag.replace(/[^\w ^@ - .]/g,'').trim().replace(/\W+s/g,'-');
     }
+       
+});
 
-})
-}

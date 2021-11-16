@@ -6,13 +6,14 @@ var modalclose = document.querySelector('.modal-close');
 modalclose.addEventListener('click',function(){
     bg.classList.remove('bg-active');
 });
+
 // console.log(modalbtn);
 function val(title,id,complete,emails){
     document.getElementById("name").value=title;
-    document.getElementById("collaborate").value = emails;
+    // document.getElementById("collaborate").value = emails;
     document.getElementById("myform").action = `/update/${id}`;
 
-
+    k = id;
     if(complete == 1){
         document.getElementById("check").checked = true;
 
@@ -29,5 +30,3 @@ for(var i=0; i< buttons.length; i++){
        
     });
 }
-
-

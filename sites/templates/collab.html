@@ -5,7 +5,7 @@
     <div class="container contains">
     {% for task in user.tasks[::-1] %}
             {% if task.users.count()>1 %}
-
+                <p id="hidden-tag">{{task.id}}</p>
                 <div class="box">
                     {% if task.completed == True %}
                         <img src="{{ url_for('static',filename = 'images/circle.svg') }}" alt=""></img>
@@ -18,12 +18,12 @@
                     
                             {% if task.completed == True %}
                                 {% if task.users[2] %}
-                                    <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'{{task.users[2].email}}')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                                    <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'{{task.users[1].email}}')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
                                 {% else %}
                                     <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},1 ,'')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
                                 {% endif %}
                             {% else %}
-                                <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},0,'{{task.users[2].email}}')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
+                                <a href="#" class="modal-btn" onclick="val('{{task.title}}',{{task.id}},0,'{{task.users[1].email}}')"><img src="{{ url_for('static',filename = 'images/edit.svg') }}" alt=""></img></a>
                             {% endif %}
                             <a href="/delete/{{task.id}}" ><img src="{{ url_for('static',filename = 'images/delete.svg') }}" alt="" ></img></a>
                     </div>
@@ -40,8 +40,10 @@
                     
                     <label for="check">Completed</label>
                     <input type="checkbox" name="check" id="check">
-                    <label for="">Collaboration</label>
-                    <input type="text" name="collaborate" id="collaborate">
+                    <!-- <label for="">Collaboration</label>
+                    <input type="text" name="collaborate" id="collaborate"> -->
+                    <div class="tags-input" data-name="tags-input">
+                    </div>
                     <button type="submit">update</button>
                 </form>
                 

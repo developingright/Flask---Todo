@@ -36,24 +36,43 @@ def update(id):
             task.completed = True
         else:
             task.completed = False
-        collaborate = request.form.get("collaborate")
-  
+        # collaborate = request.form.get("collaborate")
+        tags = request.form.get('tags-input')
+        
         flag = False
-        for i in task.users:
-            if i.email == collaborate:
-                flag = True
-                print("the email was found")
-                break
-        print(flag)
-        if flag == False:
-            for x in users:
-                f = x.email
-                print("collaborate and user  is ",collaborate,f)
-                if f==collaborate:
-                    m = User.query.get(x.id)
-                    task.users.append(m)
-                else:
-                    print("no result found")
+        tags = tags.split(' ')
+        m = []
+        print('yeh to dekh lo,',tags)
+        for _ in task.users:
+            m.append(_.email)
+        print(len(tags),len(m))
+        if len(tags)<=len(m)-1:
+            print('this is under')
+            m = m[1:]
+            for k in m:
+                f = User.query.filter_by(email=f'{k}').first()
+                if k not in tags:
+                    task.users.remove(f)
+        else:
+            for i in tags:
+                x = User.query.filter_by(email=f'{i}').first()
+                if x!=None:
+                    task.users.append(x)
+            
+        # for k in tags:
+        #     for i in task.users:
+        #         if i.email == k:
+        #             flag = True
+        #             break
+
+        # if flag == False:
+        #     for k in tags:
+        #         for x in users:
+        #             f = x.email
+        #             if f==k:
+        #                 m = User.query.get(x.id)
+        #                 task.users.append(m)
+                        
         
         db.session.commit()
 
@@ -88,6 +107,6 @@ def taskusers(id):
         for users in task.users:
             l.append(users.email)
 
-        print(l)
+        print('the list is : ',l)
         return jsonify(l)  # serialize and use JSON headers
  
